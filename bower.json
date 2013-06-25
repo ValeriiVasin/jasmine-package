@@ -1,0 +1,7 @@
+{
+    "name": "jasmine-package",
+    "version": "0.0.1",
+    "dependencies": {
+        "jasmine": "~1.3.1"
+    }
+}

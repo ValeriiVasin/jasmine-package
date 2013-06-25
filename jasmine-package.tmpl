@@ -1,0 +1,12 @@
+/** inject css */
+;(function () {
+    var style=document.createElement('style');
+    style.innerHTML = "<%= css %>";
+    document.body.appendChild(style);
+}());
+
+/** inject core */
+<%= core %>
+
+/** inject reporter */
+<%= reporter %>
