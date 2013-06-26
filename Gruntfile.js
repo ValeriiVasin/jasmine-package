@@ -7,7 +7,7 @@ module.exports = function (grunt) {
             core: 'components/jasmine/lib/jasmine-core/jasmine.js',
             reporter: 'components/jasmine/lib/jasmine-core/jasmine-html.js',
 
-            output: 'jasmine-package.js'
+            output: 'build/jasmine-package.js'
         },
 
         uglify: {
@@ -16,8 +16,15 @@ module.exports = function (grunt) {
                     mangle: false
                 },
                 files: {
-                    'jasmine-package.min.js': 'jasmine-package.js'
+                    'build/jasmine-package.min.js': 'build/jasmine-package.js'
                 }
+            }
+        },
+
+        watch: {
+            build: {
+                files: 'jasmine-package.tmpl',
+                tasks: ['build']
             }
         }
     });
@@ -43,4 +50,5 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 };
