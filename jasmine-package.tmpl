@@ -2,9 +2,16 @@
 ;(function () {
     var style = document.createElement('style'),
         scripts = document.getElementsByTagName('script'),
-        script = scripts[ scripts.length - 1 ];
+        script = scripts[ scripts.length - 1 ],
+        css = "<%= css %>";
 
-    style.innerHTML = "<%= css %>";
+    style.setAttribute('type', 'text/css');
+    if ( style.styleSheet ) {
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild( document.createTextNode(css) );
+    }
+
     script.parentNode.insertBefore(style, script);
 
     // export current script node into the window
