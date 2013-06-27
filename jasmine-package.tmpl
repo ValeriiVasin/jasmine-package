@@ -26,33 +26,33 @@
 
 /** Runner */
 ;(function() {
-  var jasmineEnv = jasmine.getEnv(),
-    htmlReporter = new jasmine.HtmlReporter(),
-    currentOnload = window.onload,
-    isAsync = typeof window.__script.getAttribute('data-async') === 'string';
+    var jasmineEnv = jasmine.getEnv(),
+        htmlReporter = new jasmine.HtmlReporter(),
+        currentOnload = window.onload,
+        isAsync = typeof window.__script.getAttribute('data-async') === 'string';
 
-  jasmineEnv.updateInterval = 250;
-  jasmineEnv.addReporter(htmlReporter);
+    jasmineEnv.updateInterval = 250;
+    jasmineEnv.addReporter(htmlReporter);
 
-  /**
-   Delegate filtering of specs to the reporter. Allows for clicking on single suites or specs in the results to only run a subset of the suite.
-   */
-  jasmineEnv.specFilter = function(spec) {
-    return htmlReporter.specFilter(spec);
-  };
-
-  if (isAsync) {
-    // export async execution function
-    window.jasmineAsyncDone = function () {
-      jasmineEnv.execute();
-    }
-  } else {
-    window.onload = function () {
-      if (typeof currentOnload === 'function') {
-        currentWindowOnload();
-      }
-
-      jasmineEnv.execute();
+    jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
     };
-  }
+
+    if (isAsync) {
+
+        // export async execution function
+        window.jasmineAsyncDone = function () {
+            jasmineEnv.execute();
+        }
+    } else {
+
+        // run specs onload
+        window.onload = function () {
+            if (typeof currentOnload === 'function') {
+                currentWindowOnload();
+            }
+
+            jasmineEnv.execute();
+        };
+    }
 }());
