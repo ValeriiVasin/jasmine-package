@@ -23,8 +23,14 @@ module.exports = function (grunt) {
 
         watch: {
             build: {
-                files: 'jasmine-package.tmpl',
-                tasks: ['build']
+                files: [
+                    'jasmine-package.tmpl',
+                    'examples/*.html'
+                ],
+                tasks: ['build'],
+                options: {
+                    livereload: true
+                }
             }
         }
     });
