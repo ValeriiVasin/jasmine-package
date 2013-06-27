@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Async usage of jasmine-package</title>
+  <script data-async src="../build/jasmine-package.js"></script>
+</head>
+<body>
+  <h1 id='init'>Initializing suites...</h1>
+  <script>
+    setTimeout(function () {
+      describe('Test suite example', function () {
+        it('should be awesome', function () {
+          expect('Jasmine is awesome.')
+              .toBe('Jasmine is awesome.');
+        });
+      });
+
+      document.body.removeChild(
+        document.getElementById('init')
+      );
+
+      jasmineAsyncDone();
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -1,10 +1,14 @@
 /** inject css */
 ;(function () {
     var style = document.createElement('style'),
-        script = document.getElementsByTagName('script')[0];
+        scripts = document.getElementsByTagName('script'),
+        script = scripts[ scripts.length - 1 ];
 
     style.innerHTML = "<%= css %>";
     script.parentNode.insertBefore(style, script);
+
+    // export current script node into the window
+    window.__script = script;
 }());
 
 /** inject core */
@@ -14,14 +18,13 @@
 <%= reporter %>
 
 /** Runner */
-(function() {
-  var jasmineEnv = jasmine.getEnv();
-  jasmineEnv.updateInterval = 250;
+;(function() {
+  var jasmineEnv = jasmine.getEnv(),
+    htmlReporter = new jasmine.HtmlReporter(),
+    currentOnload = window.onload,
+    isAsync = typeof window.__script.getAttribute('data-async') === 'string';
 
-  /**
-   Create the `HTMLReporter`, which Jasmine calls to provide results of each spec and each suite. The Reporter is responsible for presenting results to the user.
-   */
-  var htmlReporter = new jasmine.HtmlReporter();
+  jasmineEnv.updateInterval = 250;
   jasmineEnv.addReporter(htmlReporter);
 
   /**
@@ -31,23 +34,18 @@
     return htmlReporter.specFilter(spec);
   };
 
-  /**
-   Run all of the tests when the page finishes loading - and make sure to run any previous `onload` handler
-
-   ### Test Results
-
-   Scroll down to see the results of all of these specs.
-   */
-  var currentWindowOnload = window.onload;
-  window.onload = function() {
-    if (currentWindowOnload) {
-      currentWindowOnload();
+  if (isAsync) {
+    // export async execution function
+    window.jasmineAsyncDone = function () {
+      jasmineEnv.execute();
     }
+  } else {
+    window.onload = function () {
+      if (typeof currentOnload === 'function') {
+        currentWindowOnload();
+      }
 
-    execJasmine();
-  };
-
-  function execJasmine() {
-    jasmineEnv.execute();
+      jasmineEnv.execute();
+    };
   }
-})();
+}());
