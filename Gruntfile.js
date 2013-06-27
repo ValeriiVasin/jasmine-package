@@ -39,6 +39,7 @@ module.exports = function (grunt) {
 
         data.css = data.css
             .replace(/\n+/g, '')
+            .replace(/\\/g, '\\\\')
             .replace(/('|")/g, '\\$1');
 
         grunt.file.write(
