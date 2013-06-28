@@ -6,10 +6,15 @@ Jasmine-package is a tiny project that helps you to include [jasmine](http://piv
 
 Links
 =====
+Source codes:
 ```
 http://valeriivasin.com/projects/jasmine-package/build/jasmine-package.js
 http://valeriivasin.com/projects/jasmine-package/build/jasmine-package.min.js
 ```
+Live Demo snippets:
+* [JS Bin](http://jsbin.com/ipafox/1/edit)
+* [JS Fiddle](http://jsfiddle.net/InviS/LZ2RE)
+* [Plunker](http://plnkr.co/edit/aRoi9DNGOxopuq3X9LEk?p=preview)
 
 How does it work
 ================
