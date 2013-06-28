@@ -26,7 +26,7 @@ Basic functionality
 ```html
 <script src='jasmine-package.js'></script>
 <script>
-    describe('Test suite example', function () {
+    describe('Basic suite example', function () {
         it('should be awesome', function () {
             expect('Jasmine is awesome.')
                 .toBe('Jasmine is awesome.');
@@ -37,13 +37,13 @@ Basic functionality
 
 Async mode
 ==========
-If your test suites is loading asyncronously (for example, using [RequireJS](http://requirejs.org)), you're should turn async mode on using `data-async` attribute. After all you're async stuff will be finished you should call global function `jasmineAsyncDone` to start jasmine suites execution.
+If some of your test suites are loading asyncronously (for example, using [RequireJS](http://requirejs.org)), you should turn async mode on using `data-async` attribute. When all async stuff will be done you should invoke global function `jasmineAsyncDone` to start jasmine suites execution.
 
 ```html
 <script data-async src='jasmine-package.js'></script>
 <script>
     setTimeout(function () {
-        describe('Test suite example', function () {
+        describe('Async suite example', function () {
             it('should be awesome', function () {
                 expect('Jasmine is awesome.')
                     .toBe('Jasmine is awesome.');
