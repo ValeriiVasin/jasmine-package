@@ -1,6 +1,6 @@
 About
 =====
-Jasmine-package is a tiny project that helps you to include [jasmine](http://pivotal.github.io/jasmine) using one line of code.
+Jasmine-package is a tiny project that helps you to include [jasmine](https://jasmine.github.io/) using one line of code.
 
 *Jasmine version: 1.3.1 revision 1354556913.*
 
